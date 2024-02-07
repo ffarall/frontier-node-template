@@ -1,92 +1,116 @@
 [package]
-name = "node-template"
-version = "4.0.0-dev"
+name = "frontier-template-node"
+version = "0.0.0"
+license = "Unlicense"
+build = "build.rs"
 description = "A fresh FRAME-based Substrate node, ready for hacking."
 publish = false
-build = "build.rs"
-homepage = { workspace = true }
-license = { workspace = true }
 authors = { workspace = true }
-repository = { workspace = true }
 edition = { workspace = true }
-
-[lints]
-workspace = true
+repository = { workspace = true }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 
-[[bin]]
-name = "node-template"
-
 [dependencies]
-clap = { version = "4.4.14", features = ["derive"] }
-futures = { version = "0.3.21", features = ["thread-pool"] }
-serde_json = "1.0.111"
+async-trait = { workspace = true }
+clap = { workspace = true }
+futures = { workspace = true }
+hex-literal = { workspace = true }
+jsonrpsee = { workspace = true, features = ["server", "macros"] }
+log = { workspace = true }
+scale-codec = { package = "parity-scale-codec", workspace = true }
+serde_json = { workspace = true, features = ["arbitrary_precision"] }
 
-sc-cli = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sp-core = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sc-executor = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sc-network = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sc-service = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sc-telemetry = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sc-transaction-pool = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sc-transaction-pool-api = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sc-offchain = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sc-consensus-aura = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sp-consensus-aura = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sc-consensus = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sc-consensus-grandpa = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sp-consensus-grandpa = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sc-client-api = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sp-runtime = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sp-io = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sp-timestamp = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sp-inherents = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sp-keyring = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-frame-system = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-pallet-transaction-payment = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0", default-features = false }
-
-# These dependencies are used for the node template's RPCs
-jsonrpsee = { version = "0.16.2", features = ["server"] }
-sp-api = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sc-rpc-api = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sp-blockchain = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sp-block-builder = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-sc-basic-authorship = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-substrate-frame-rpc-system = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-pallet-transaction-payment-rpc = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-
+# Substrate
+prometheus-endpoint = { package = "substrate-prometheus-endpoint", workspace = true }
+sc-basic-authorship = { workspace = true }
+sc-chain-spec = { workspace = true }
+sc-cli = { workspace = true }
+sc-client-api = { workspace = true }
+sc-consensus = { workspace = true }
+sc-consensus-aura = { workspace = true }
+sc-consensus-grandpa = { workspace = true }
+sc-consensus-manual-seal = { workspace = true }
+sc-executor = { workspace = true }
+sc-network = { workspace = true }
+sc-network-sync = { workspace = true }
+sc-offchain = { workspace = true }
+sc-rpc = { workspace = true }
+sc-rpc-api = { workspace = true }
+sc-service = { workspace = true }
+sc-telemetry = { workspace = true }
+sc-transaction-pool = { workspace = true }
+sc-transaction-pool-api = { workspace = true }
+sp-api = { workspace = true, features = ["default"] }
+sp-block-builder = { workspace = true }
+sp-blockchain = { workspace = true }
+sp-consensus-aura = { workspace = true, features = ["default"] }
+sp-consensus-grandpa = { workspace = true, features = ["default"] }
+sp-core = { workspace = true, features = ["default"] }
+sp-inherents = { workspace = true, features = ["default"] }
+sp-offchain = { workspace = true, features = ["default"] }
+sp-runtime = { workspace = true, features = ["default"] }
+sp-session = { workspace = true, features = ["default"] }
+sp-timestamp = { workspace = true, features = ["default"] }
+sp-transaction-pool = { workspace = true, features = ["default"] }
+# These dependencies are used for RPC
+frame-system-rpc-runtime-api = { workspace = true }
+pallet-transaction-payment-rpc = { workspace = true }
+pallet-transaction-payment-rpc-runtime-api = { workspace = true }
+substrate-frame-rpc-system = { workspace = true }
 # These dependencies are used for runtime benchmarking
-frame-benchmarking = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
-frame-benchmarking-cli = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
+frame-benchmarking = { workspace = true, optional = true }
+frame-benchmarking-cli = { workspace = true, optional = true }
+frame-system = { workspace = true }
+pallet-transaction-payment = { workspace = true }
 
-# Local Dependencies
-node-template-runtime = { path = "../runtime" }
-
-# CLI-specific dependencies
-try-runtime-cli = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0", optional = true }
+# Frontier
+fc-api = { workspace = true }
+fc-cli = { workspace = true }
+fc-consensus = { workspace = true }
+fc-db = { workspace = true }
+fc-mapping-sync = { workspace = true }
+fc-rpc = { workspace = true }
+fc-rpc-core = { workspace = true }
+fc-storage = { workspace = true }
+fp-account = { workspace = true }
+fp-dynamic-fee = { workspace = true, features = ["default"] }
+fp-evm = { workspace = true, features = ["default"] }
+fp-rpc = { workspace = true, features = ["default"] }
+frontier-template-runtime = { workspace = true, features = ["std"] }
 
 [build-dependencies]
-substrate-build-script-utils = { git = "https://github.com/paritytech/polkadot-sdk.git", tag = "polkadot-v1.6.0" }
+substrate-build-script-utils = { workspace = true }
 
 [features]
-default = []
-# Dependencies that are only required if runtime benchmarking should be build.
-runtime-benchmarks = [
-	"frame-benchmarking-cli/runtime-benchmarks",
-	"frame-benchmarking/runtime-benchmarks",
-	"frame-system/runtime-benchmarks",
-	"node-template-runtime/runtime-benchmarks",
-	"sc-service/runtime-benchmarks",
-	"sp-runtime/runtime-benchmarks",
+default = [
+	"rocksdb",
+	"sql",
+	"txpool",
+	"rpc-binary-search-estimate",
 ]
-# Enable features that allow the runtime to be tried and debugged. Name might be subject to change
-# in the near future.
-try-runtime = [
-	"frame-system/try-runtime",
-	"node-template-runtime/try-runtime",
-	"pallet-transaction-payment/try-runtime",
-	"sp-runtime/try-runtime",
-	"try-runtime-cli/try-runtime",
+rocksdb = [
+	"sc-cli/rocksdb",
+	"sc-service/rocksdb",
+	"fc-cli/rocksdb",
+	"fc-db/rocksdb",
+	"fc-mapping-sync/rocksdb",
+	"fc-rpc/rocksdb",
+	"frontier-template-runtime/with-rocksdb-weights",
+]
+paritydb = [
+	"frontier-template-runtime/with-paritydb-weights",
+]
+sql = [
+	"fc-db/sql",
+	"fc-mapping-sync/sql",
+]
+txpool = ["fc-rpc/txpool"]
+rpc-binary-search-estimate = ["fc-rpc/rpc-binary-search-estimate"]
+runtime-benchmarks = [
+	"frame-benchmarking/runtime-benchmarks",
+	"frame-benchmarking-cli/runtime-benchmarks",
+	"sc-service/runtime-benchmarks",
+	"frontier-template-runtime/runtime-benchmarks",
 ]
