@@ -19,11 +19,11 @@ futures = { workspace = true }
 hex-literal = { workspace = true }
 jsonrpsee = { workspace = true, features = ["server", "macros"] }
 log = { workspace = true }
-scale-codec = { package = "parity-scale-codec", workspace = true }
+scale-codec = { workspace = true }
 serde_json = { workspace = true, features = ["arbitrary_precision"] }
 
 # Substrate
-prometheus-endpoint = { package = "substrate-prometheus-endpoint", workspace = true }
+prometheus-endpoint = { workspace = true }
 sc-basic-authorship = { workspace = true }
 sc-chain-spec = { workspace = true }
 sc-cli = { workspace = true }
@@ -64,6 +64,8 @@ frame-benchmarking = { workspace = true, optional = true }
 frame-benchmarking-cli = { workspace = true, optional = true }
 frame-system = { workspace = true }
 pallet-transaction-payment = { workspace = true }
+# CLI-specific dependencies
+try-runtime-cli = { workspace = true, optional = true }
 
 # Frontier
 fc-api = { workspace = true }
@@ -109,8 +111,19 @@ sql = [
 txpool = ["fc-rpc/txpool"]
 rpc-binary-search-estimate = ["fc-rpc/rpc-binary-search-estimate"]
 runtime-benchmarks = [
-	"frame-benchmarking/runtime-benchmarks",
 	"frame-benchmarking-cli/runtime-benchmarks",
-	"sc-service/runtime-benchmarks",
+	"frame-benchmarking/runtime-benchmarks",
+	"frame-system/runtime-benchmarks",
 	"frontier-template-runtime/runtime-benchmarks",
+	"sc-service/runtime-benchmarks",
+	"sp-runtime/runtime-benchmarks",
+]
+# Enable features that allow the runtime to be tried and debugged. Name might be subject to change
+# in the near future.
+try-runtime = [
+	"frame-system/try-runtime",
+	"frontier-template-runtime/try-runtime",
+	"pallet-transaction-payment/try-runtime",
+	"sp-runtime/try-runtime",
+	"try-runtime-cli/try-runtime",
 ]
